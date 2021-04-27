@@ -16,7 +16,20 @@ import $ from "jquery";
  */
 
 function exercise02() {
-  // Complete the code of the function
+  // Complete the code of the functiof
+  $.get("https://jsonplaceholder.typicode.com/users/1/", {
+    method: "GET",
+  }).then(
+    function success(data, statusText, jqXHR) {
+      let misDatos = $('#data').text(JSON.stringify(data, null, 2));
+      console.log(misDatos);
+    },
+    function failed(jqXHR, errorStatusText, errorMessage) {
+      console.log(jqXHR);
+      console.log(errorStatusText);
+      console.log(errorMessage);
+    }
+  );
 }
 
 export default exercise02;

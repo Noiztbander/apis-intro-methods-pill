@@ -9,16 +9,17 @@
     />
     <link rel="stylesheet" href="src/styles.css" />
     <script src="/src/main.js"></script>
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
   </head>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
   <body>
     <div class="container mt-3">
       <div class="row-cols-1">
         <div class="col">
           <h1 class="mt-5">
-            <code>
-              Apis Intro Methods Pill
-            </code>
+            <code> Apis Intro Methods Pill </code>
           </h1>
         </div>
         <div class="col mt-4">
@@ -61,9 +62,7 @@
             <button class="btn btn-primary mr-sm-4 mb-3 mb-sm-0 run-ex">
               Execute
             </button>
-            <button class="btn btn-outline-dark clear-ex">
-              Clear
-            </button>
+            <button class="btn btn-outline-dark clear-ex">Clear</button>
           </div>
           <hr />
         </section>
@@ -76,5 +75,58 @@
         </section>
       </div>
     </div>
+    <!-- <script>
+      //Exercise 02
+      $.get("https://jsonplaceholder.typicode.com/users/1/", {
+        method: "GET",
+      }).then(
+        function success(data, statusText, jqXHR) {
+          let misDatos = $("#data").text(JSON.stringify(data, null, 2));
+          console.log(misDatos);
+        },
+        function failed(jqXHR, errorStatusText, errorMessage) {
+          console.log(jqXHR);
+          console.log(errorStatusText);
+          console.log(errorMessage);
+        }
+      );
+    </script> -->
+
+    <!-- <script>
+      fetch("https://jsonplaceholder.typicode.com/posts/1/comments", {
+        method: "GET",
+      })
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (json) {
+          // Data returned from the server
+          document.querySelector("#data").innerHTML = JSON.stringify(
+            json,
+            null,
+            2
+          );
+        });
+    </script> -->
+    <script>
+        axios({
+        url: "https://jsonplaceholder.typicode.com/posts?_limit=6",
+        method: "GET", // default
+        }).then(function (response) {
+        // The response is already converted from JSON
+        let myParentDiv = document.querySelector("div.ex4-container");
+          response.data.forEach((element)=>{
+            let myDiv = document.createElement("div");
+            myDiv.insertAdjacentHTML("afterbegin",`
+            <div class="post">
+              <p class="post__title">${element.title}</p>
+              <p>${element.body}</p>
+            </div>
+            `);
+            myParentDiv.appendChild(myDiv);
+          });
+          //console.log(response);
+        });
+    </script>
   </body>
 </html>

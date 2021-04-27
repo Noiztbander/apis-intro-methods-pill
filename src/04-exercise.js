@@ -37,6 +37,24 @@ function exercise04() {
   // Make sure to return the axios.get() method call
   //
   // return axios.get()...
+  axios({
+    url: "https://jsonplaceholder.typicode.com/posts?_limit=6",
+    method: "GET", // default
+  }).then(function (response) {
+
+    // The response is already converted from JSON
+    response.data.forEach((element) => {
+      let post = $(
+        "<div class='post'><p class='post_title'>" +
+          element.title +
+          "</p><p>" +
+          element.body +
+          "</p></div>"
+      );
+      $(".ex4-container").append(post);
+      console.log(element);
+    });
+  });
 }
 
 export default exercise04;
